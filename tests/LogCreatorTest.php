@@ -20,7 +20,6 @@ class LogCreatorTest extends PHPUnit_Framework_TestCase {
 
   /**
   * @group creator
-  * @group adam
   * @expectedException PHPHARchive_InvalidSchemaException
   */
   public function test_creator_name_missing_content() {

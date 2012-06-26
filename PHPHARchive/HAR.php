@@ -4,7 +4,8 @@ require_once 'Exceptions.php';
 
 class PHPHARchive_HAR {
   private $raw;
-  private $_creator;  
+  private $_creator;
+  private $_browser;
 
   function __construct($h) {
     if (is_file($h)) {
@@ -58,6 +59,33 @@ class PHPHARchive_HAR {
       throw new PHPHARchive_InvalidSchemaException("'creator' is mandatory in the 'log' object");
     }
 
+    // browser; optional
+    if (array_key_exists("browser", $raw["log"])) {
+        $this->_browser = $raw["log"]["browser"];
+        // name; mandatory
+        if (! array_key_exists("name", $this->_browser)) {
+            throw new PHPHARchive_InvalidSchemaException("'name' is mandatory in the 'browser' object");
+          } else {
+            if (strlen($this->_browser["name"]) == 0) {
+              throw new PHPHARchive_InvalidSchemaException("'name' must contain 'Name of the application/browser used to export the log'");
+            }
+          }
+
+        // version; mandatory
+        if (! array_key_exists("version", $this->_browser)) {
+            throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
+        } else {
+          if (strlen($this->_browser["version"]) == 0) {
+            throw new PHPHARchive_InvalidSchemaException("'version' must contain 'Version of the application/browser used to export the log.'");
+          }
+        }
+
+        // comment; optional, introduced in 1.2
+        if (array_key_exists("comment", $this->_browser) && $this->version == '1.1') {
+            throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
+        }
+    }
+
   }
   
   function __get($property) {
@@ -68,7 +96,17 @@ class PHPHARchive_HAR {
         if (array_key_exists("comment", $this->_creator)) {
           $c["comment"] = $this->_creator["comment"];
         }
-        return $c;
+        return $c;        
+      case "browser":
+        if ($this->_browser) {
+          $b = array("name" => $this->_browser["name"],
+                     "version" => $this->_browser["version"]);
+          if (array_key_exists("comment", $this->_browser)) {
+            $b["comment"] = $this->_browser["comment"];
+          }
+          return $b;
+        }
+        return Null;
       default:
         return $this->$property;
     }
