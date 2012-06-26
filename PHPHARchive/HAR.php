@@ -4,6 +4,7 @@ require_once 'Exceptions.php';
 
 class PHPHARchive_HAR {
   private $raw;
+  private $_creator;  
 
   function __construct($h) {
     if (is_file($h)) {
@@ -28,6 +29,49 @@ class PHPHARchive_HAR {
       throw new PHPHARchive_UnsupportedVersionException($raw["log"]["version"] . " is not a supported version");
     }
 
+    // creator; mandatory
+    if (array_key_exists("creator", $raw["log"])) {
+        $this->_creator = $raw["log"]["creator"];
+        // name; mandatory
+        if (! array_key_exists("name", $this->_creator)) {
+            throw new PHPHARchive_InvalidSchemaException("'name' is mandatory in the 'creator' object");
+          } else {
+            if (strlen($this->_creator["name"]) == 0) {
+              throw new PHPHARchive_InvalidSchemaException("'version' must contain 'Name of the application/browser used to export the log'");
+            }
+          }
+
+        // version; mandatory
+        if (! array_key_exists("version", $this->_creator)) {
+            throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'creator' object'");
+        } else {
+          if (strlen($this->_creator["version"]) == 0) {
+            throw new PHPHARchive_InvalidSchemaException("'version' must contain 'Version of the application/browser used to export the log.'");
+          }
+        }
+
+        // comment; optional, introduced in 1.2
+        if (array_key_exists("comment", $this->_creator) && $this->version == '1.1') {
+            throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'creator' object'");
+        }
+    } else {
+      throw new PHPHARchive_InvalidSchemaException("'creator' is mandatory in the 'log' object");
+    }
+
+  }
+  
+  function __get($property) {
+    switch($property) {
+      case "creator":
+        $c = array("name" => $this->_creator["name"],
+                   "version" => $this->_creator["version"]);
+        if (array_key_exists("comment", $this->_creator)) {
+          $c["comment"] = $this->_creator["comment"];
+        }
+        return $c;
+      default:
+        return $this->$property;
+    }
   }
 }
 ?>
