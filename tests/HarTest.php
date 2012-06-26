@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__) . '/../PHPHarchive/HAR.php');
 
-class LogVersionTest extends PHPUnit_Framework_TestCase {
+class HarTest extends PHPUnit_Framework_TestCase {
   /**
   * @group har
   * @expectedException PHPHARchive_MissingHARException
