@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<package version="2.0" xmlns="http://pear.php.net/dtd/package-2.0"
+    xmlns:tasks="http://pear.php.net/dtd/tasks-1.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+                        http://pear.php.net/dtd/tasks-1.0.xsd
+                        http://pear.php.net/dtd/package-2.0
+                        http://pear.php.net/dtd/package-2.0.xsd">
+    <name>PHPHARchive</name>
+    <channel>element-34.github.com/pear</channel>
+    <summary>PHP Client got poking HTTP Archive (HAR) files</summary>
+    <description>PHP Client got poking HTTP Archive (HAR) files.</description>
+    <lead>
+        <name>Adam Goucher</name>
+        <user>adamgoucher</user>
+        <email>adam@element34.ca</email>
+        <active>yes</active>
+    </lead>
+    <date>2012-06-26</date>
+    <version>
+        <release>1.0.0</release>
+        <api>1.0.0</api>
+    </version>
+    <stability>
+        <release>stable</release>
+        <api>stable</api>
+    </stability>
+    <license>Apache 2</license>
+    <notes>Some notes go here</notes>
+    <contents>
+        <dir name="/">
+            <dir name="PHPHARchive">
+                <file baseinstalldir="/" name="HAR.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+            </dir>
+        </dir>
+    </contents>
+    <dependencies>
+        <required>
+            <php>
+                <min>5.3.3</min>
+            </php>
+            <pearinstaller>
+                <min>1.9.2</min>
+            </pearinstaller>
+        </required>
+    </dependencies>
+    <phprelease>
+    </phprelease>
+</package>
