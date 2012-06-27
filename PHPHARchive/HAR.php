@@ -11,15 +11,15 @@ class PHPHARchive_HAR {
 
   function __construct($h) {
     if (is_file($h)) {
-      $raw = json_decode(file_get_contents($h), True);
+      $this->raw = json_decode(file_get_contents($h), True);
     } else {
       throw new PHPHARchive_MissingHARException($h . " does not exist");
     }
     
     // version; mandatory, but can be empty
-    if (array_key_exists("version", $raw["log"])) {
-      if (strlen($raw["log"]["version"]) != 0) {
-        $this->version = $raw["log"]["version"];
+    if (array_key_exists("version", $this->raw["log"])) {
+      if (strlen($this->raw["log"]["version"]) != 0) {
+        $this->version = $this->raw["log"]["version"];
       } else {
         $this->version = "1.1";
       }
@@ -29,12 +29,12 @@ class PHPHARchive_HAR {
     
     // only two versions of the HAR schema available now and can't guess the future
     if (! in_array($this->version, array("1.1", "1.2"))) {
-      throw new PHPHARchive_UnsupportedVersionException($raw["log"]["version"] . " is not a supported version");
+      throw new PHPHARchive_UnsupportedVersionException($this->raw["log"]["version"] . " is not a supported version");
     }
 
     // creator; mandatory
-    if (array_key_exists("creator", $raw["log"])) {
-        $this->_creator = $raw["log"]["creator"];
+    if (array_key_exists("creator", $this->raw["log"])) {
+        $this->_creator = $this->raw["log"]["creator"];
         // name; mandatory
         if (! array_key_exists("name", $this->_creator)) {
             throw new PHPHARchive_InvalidSchemaException("'name' is mandatory in the 'creator' object");
@@ -62,8 +62,8 @@ class PHPHARchive_HAR {
     }
 
     // browser; optional
-    if (array_key_exists("browser", $raw["log"])) {
-        $this->_browser = $raw["log"]["browser"];
+    if (array_key_exists("browser", $this->raw["log"])) {
+        $this->_browser = $this->raw["log"]["browser"];
         // name; mandatory
         if (! array_key_exists("name", $this->_browser)) {
             throw new PHPHARchive_InvalidSchemaException("'name' is mandatory in the 'browser' object");
@@ -89,12 +89,16 @@ class PHPHARchive_HAR {
     }
 
     // pages; optional
-    if (array_key_exists("pages", $raw["log"])) {
-      foreach($raw["log"]["pages"] as $page) {
+    if (array_key_exists("pages", $this->raw["log"])) {
+      foreach($this->raw["log"]["pages"] as $page) {
         array_push($this->pages, new PHPHARchive_Page($page, $this->version));
       }
     }
 
+    // comment; optional, introduced in 1.2
+    if (array_key_exists("comment", $this->raw["log"]) && $this->version == '1.1') {
+        throw new PHPHARchive_InvalidSchemaException("'comment' was introduced in version 1.2");
+    }
   }
   
   function __get($property) {
@@ -114,6 +118,11 @@ class PHPHARchive_HAR {
             $b["comment"] = $this->_browser["comment"];
           }
           return $b;
+        }
+        return Null;
+      case "comment":
+        if (array_key_exists("comment", $this->raw["log"])) {
+          return $this->raw["log"]["comment"];
         }
         return Null;
       default:
