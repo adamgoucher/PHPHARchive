@@ -14,7 +14,7 @@ class PHPHARchive_Request {
   function __construct($request, $version) {
     $this->raw = $request;
 
-    // request; mandatory
+    // method; mandatory
     if (array_key_exists("method", $request)) {
       if (strlen($request["method"]) == 0) {
         throw new PHPHARchive_InvalidSchemaException("'method' must contain 'Request method (GET, POST, ...)'");
