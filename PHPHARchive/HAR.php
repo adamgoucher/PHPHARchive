@@ -2,12 +2,14 @@
 
 require_once 'Exceptions.php';
 require_once 'Page.php';
+require_once 'Entry.php';
 
 class PHPHARchive_HAR {
   private $raw;
   private $_creator;
   private $_browser;
   public $pages = array();
+  public $entries = array();
 
   function __construct($h) {
     if (is_file($h)) {
@@ -95,6 +97,15 @@ class PHPHARchive_HAR {
       }
     }
 
+    // creator; mandatory
+    if (array_key_exists("entries", $this->raw["log"])) {
+      foreach($this->raw["log"]["entries"] as $entry) {
+        array_push($this->entries, new PHPHARchive_Entry($entry, $this->version));
+      }
+    } else {
+      throw new PHPHARchive_InvalidSchemaException("'creator' is mandatory in the 'log' object");
+    }
+      
     // comment; optional, introduced in 1.2
     if (array_key_exists("comment", $this->raw["log"]) && $this->version == '1.1') {
         throw new PHPHARchive_InvalidSchemaException("'comment' was introduced in version 1.2");

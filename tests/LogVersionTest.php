@@ -4,15 +4,6 @@ require_once(dirname(__FILE__) . '/../PHPHarchive/HAR.php');
 class LogVersionTest extends PHPUnit_Framework_TestCase {
   /**
   * @group version
-  * @expectedException PHPHARchive_MissingHARException
-  * @expectedExceptionMessage foo.har does not exist
-  */  
-  public function test_no_such_file() {
-    $h = new PHPHARchive_HAR("foo.har");
-  }
-  
-  /**
-  * @group version
   */  
   public function test_har_version_one_point_one() {
     $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/version/one_point_one.har');
