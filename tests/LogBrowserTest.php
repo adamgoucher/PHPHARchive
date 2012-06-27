@@ -4,7 +4,6 @@ require_once(dirname(__FILE__) . '/../PHPHarchive/HAR.php');
 class LogBrowserTest extends PHPUnit_Framework_TestCase {
   /**
   * @group browser
-  * @group adam
   */
   public function test_browser_missing() {
     $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/browser/missing.har');

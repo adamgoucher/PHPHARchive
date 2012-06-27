@@ -1,11 +1,13 @@
 <?php
 
 require_once 'Exceptions.php';
+require_once 'Page.php';
 
 class PHPHARchive_HAR {
   private $raw;
   private $_creator;
   private $_browser;
+  public $pages = array();
 
   function __construct($h) {
     if (is_file($h)) {
@@ -84,6 +86,13 @@ class PHPHARchive_HAR {
         if (array_key_exists("comment", $this->_browser) && $this->version == '1.1') {
             throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
         }
+    }
+
+    // pages; optional
+    if (array_key_exists("pages", $raw["log"])) {
+      foreach($raw["log"]["pages"] as $page) {
+        array_push($this->pages, new PHPHARchive_Page($page, $this->version));
+      }
     }
 
   }
