@@ -10,6 +10,8 @@ class PHPHARchive_Response {
 
   function __construct($response, $version) {
     $this->raw = $response;
+    public $cookies = array();
+    public $headers = array();
     
     // status; mandatory
     if (array_key_exists("status", $response)) {
