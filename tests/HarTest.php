@@ -19,5 +19,21 @@ class HarTest extends PHPUnit_Framework_TestCase {
     $entries = $h->get_entries_by_page_ref("page_1_0");
     $this->assertEquals(count($entries), 21);
   }
+
+  /**
+  * @group interesting
+  */  
+  public function test_find_entries_page_by_status() {
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/groups.google.com.120615_6_68C1.har');
+    $entries = $h->get_entries_by_page_ref("page_1_0");
+    $four_oh_fours = array();
+    foreach ($entries as $entry) {
+      if ($entry->response->status == 404) {
+        array_push($four_oh_fours, $entry);
+      }
+    }
+    $this->assertEquals(count($four_oh_fours), 1);
+  }
+
 }
 ?>
