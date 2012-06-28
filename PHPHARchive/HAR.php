@@ -65,29 +65,21 @@ class PHPHARchive_HAR {
 
     // browser; optional
     if (array_key_exists("browser", $this->raw["log"])) {
-        $this->_browser = $this->raw["log"]["browser"];
-        // name; mandatory
-        if (! array_key_exists("name", $this->_browser)) {
-            throw new PHPHARchive_InvalidSchemaException("'name' is mandatory in the 'browser' object");
-          } else {
-            if (strlen($this->_browser["name"]) == 0) {
-              throw new PHPHARchive_InvalidSchemaException("'name' must contain 'Name of the application/browser used to export the log'");
-            }
-          }
+      $this->_browser = $this->raw["log"]["browser"];
+      // name; mandatory
+      if (! array_key_exists("name", $this->_browser)) {
+        throw new PHPHARchive_InvalidSchemaException("'name' is mandatory in the 'browser' object");
+      }
 
-        // version; mandatory
-        if (! array_key_exists("version", $this->_browser)) {
-            throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
-        } else {
-          if (strlen($this->_browser["version"]) == 0) {
-            throw new PHPHARchive_InvalidSchemaException("'version' must contain 'Version of the application/browser used to export the log.'");
-          }
-        }
+      // version; mandatory
+      if (! array_key_exists("version", $this->_browser)) {
+        throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
+      }
 
-        // comment; optional, introduced in 1.2
-        if (array_key_exists("comment", $this->_browser) && $this->version == '1.1') {
-            throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
-        }
+      // comment; optional, introduced in 1.2
+      if (array_key_exists("comment", $this->_browser) && $this->version == '1.1') {
+        throw new PHPHARchive_InvalidSchemaException("'version' is mandatory in the 'browser' object'");
+      }
     }
 
     // pages; optional
@@ -108,7 +100,7 @@ class PHPHARchive_HAR {
       
     // comment; optional, introduced in 1.2
     if (array_key_exists("comment", $this->raw["log"]) && $this->version == '1.1') {
-        throw new PHPHARchive_InvalidSchemaException("'comment' was introduced in version 1.2");
+      throw new PHPHARchive_InvalidSchemaException("'comment' was introduced in version 1.2");
     }
   }
   
@@ -139,6 +131,16 @@ class PHPHARchive_HAR {
       default:
         return $this->$property;
     }
+  }
+  
+  function get_entries_by_page_ref($page_ref) {
+    $entries = array();
+    foreach($this->entries as $entry) {
+      if ($entry->page_ref ==  $page_ref) {
+        array_push($entries, $entry);
+      }
+    }
+    return $entries;
   }
 }
 ?>

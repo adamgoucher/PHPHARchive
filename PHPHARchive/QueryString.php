@@ -20,9 +20,6 @@ class PHPHARchive_QueryString {
 
     // value; mandatory
     if (array_key_exists("value", $query_string)) {
-      if (strlen($query_string["value"]) == 0) {
-        throw new PHPHARchive_InvalidSchemaException("'value' must contain 'The value of the query string'");
-      }
       $this->method = $query_string["value"];            
     } else {
       throw new PHPHARchive_InvalidSchemaException("'value' is mandatory in a 'queryString' object");

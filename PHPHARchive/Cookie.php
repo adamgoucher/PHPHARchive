@@ -5,7 +5,7 @@ require_once 'Exceptions.php';
 class PHPHARchive_Cookie {
   private $raw;
 
-  function __construct($entry, $cookie) {
+  function __construct($cookie, $version) {
     $this->raw = $cookie;
     
     // name; mandatory
