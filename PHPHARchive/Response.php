@@ -23,9 +23,6 @@ class PHPHARchive_Response {
 
     // statusText; mandatory
     if (array_key_exists("statusText", $response)) {
-      if (strlen($response["statusText"]) == 0) {
-        throw new PHPHARchive_InvalidSchemaException("'statusText' must contain 'Response status description'");
-      }
       $this->status_text = $response["statusText"];            
     } else {
       throw new PHPHARchive_InvalidSchemaException("'statusText' is mandatory in a 'response' object");
