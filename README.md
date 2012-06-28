@@ -23,7 +23,7 @@ distribution via PEAR.
 
 ##  INSTALLATION
 
-*   This driver has been packaged for distribution via PEAR. So...
+PHPHARchive has been packaged for distribution via PEAR. So...
 
         pear channel-discover element-34.github.com/pear
         pear install -f element-34/PHPHARchive
