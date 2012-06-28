@@ -54,16 +54,16 @@ class LogCreatorTest extends PHPUnit_Framework_TestCase {
   * @group creator
   */
   public function test_creator_comment_in_one_point_two() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/creator/comment_one_point_two.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.2.har');
     $creator = $h->creator;
-    $this->assertEquals($creator["comment"], "foo");
+    $this->assertEquals($creator["comment"], "creator comment");
   }
 
   /**
   * @group creator
   */
   public function test_creator_name() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/creator/comment_one_point_two.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.2.har');
     $creator = $h->creator;
     $this->assertEquals($creator["name"], "WebPagetest");
   }
@@ -72,7 +72,7 @@ class LogCreatorTest extends PHPUnit_Framework_TestCase {
   * @group creator
   */
   public function test_creator_version() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/creator/comment_one_point_two.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.2.har');
     $creator = $h->creator;
     $this->assertEquals($creator["version"], "1.8");
   }

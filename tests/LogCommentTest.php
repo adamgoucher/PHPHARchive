@@ -23,7 +23,7 @@ class LogCommentTest extends PHPUnit_Framework_TestCase {
   * @group comment
   */
   public function test_comment_one_point_two() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/comment/one_point_two.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.2.har');
     $this->assertEquals($h->comment, "fooboo");
   }
 

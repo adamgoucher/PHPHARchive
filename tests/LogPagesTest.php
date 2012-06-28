@@ -119,10 +119,10 @@ class LogPagesTest extends PHPUnit_Framework_TestCase {
   * @group pages
   */
   public function test_page_comment_one_point_twoa() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/pages/page_timings_comment_one_point_two.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.2.har');
     $pages = $h->pages;
     $p = $pages[0];
-    $this->assertEquals($p->page_timings["comment"], "goo");
+    $this->assertEquals($p->page_timings["comment"], "page timings comment");
   }
 }
 ?>

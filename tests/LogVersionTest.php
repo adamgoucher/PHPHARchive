@@ -6,7 +6,7 @@ class LogVersionTest extends PHPUnit_Framework_TestCase {
   * @group version
   */  
   public function test_har_version_one_point_one() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/version/one_point_one.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.1.har');
     $this->assertEquals("1.1", $h->version);
   }
 
@@ -14,7 +14,7 @@ class LogVersionTest extends PHPUnit_Framework_TestCase {
   * @group version
   */  
   public function test_har_version_one_point_two() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/version/one_point_two.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-1.2.har');
     $this->assertEquals("1.2", $h->version);
   }
 
@@ -22,7 +22,7 @@ class LogVersionTest extends PHPUnit_Framework_TestCase {
   * @group version
   */  
   public function test_har_implicit_version() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/version/implicit.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete-implicit.har');
     $this->assertEquals("1.1", $h->version);
   }
 
