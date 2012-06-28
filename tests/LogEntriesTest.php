@@ -23,7 +23,7 @@ class LogEntiresTest extends PHPUnit_Framework_TestCase {
   * @group entries
   */
   public function test_page_ref() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/entries/complete.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete.har');
     $entries = $h->entries;
     $this->assertEquals($entries[0]->page_ref, "page_1_0");
   }
@@ -48,7 +48,7 @@ class LogEntiresTest extends PHPUnit_Framework_TestCase {
   * @group entries
   */
   public function test_started_date_time() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/entries/complete.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete.har');
     $entries = $h->entries;
     $this->assertEquals($entries[0]->started_date_time, "2012-06-15T12:11:20.180+00:00");
   }
@@ -58,14 +58,14 @@ class LogEntiresTest extends PHPUnit_Framework_TestCase {
   * @expectedException PHPHARchive_InvalidSchemaException
   */
   public function test_time_missing() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/entries/time_missing.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/time_missing.har');
   }
 
   /**
   * @group entries
   */
   public function test_time() {
-    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/entries/complete.har');
+    $h = new PHPHARchive_HAR(dirname(__FILE__) . '/../files/complete.har');
     $entries = $h->entries;
     $this->assertEquals($entries[0]->time, "386");
   }
