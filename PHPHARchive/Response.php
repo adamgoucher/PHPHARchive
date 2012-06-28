@@ -7,11 +7,11 @@ require_once 'Content.php';
 
 class PHPHARchive_Response {
   private $raw;
+  public $cookies = array();
+  public $headers = array();
 
   function __construct($response, $version) {
     $this->raw = $response;
-    public $cookies = array();
-    public $headers = array();
     
     // status; mandatory
     if (array_key_exists("status", $response)) {
