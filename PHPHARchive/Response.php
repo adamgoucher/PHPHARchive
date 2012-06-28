@@ -68,21 +68,21 @@ class PHPHARchive_Response {
     
     // redirectURL; mandatory
     if (array_key_exists("redirectURL", $response)) {
-      $this->redirect_url = $response["redirectURL"]
+      $this->redirect_url = $response["redirectURL"];
     } else {
       throw new PHPHARchive_InvalidSchemaException("'redirectURL' is mandatory in a 'response' object");
     }
     
     // headersSize; mandatory
     if (array_key_exists("headersSize", $response)) {
-      $this->headers_size = $response["headersSize"]
+      $this->headers_size = $response["headersSize"];
     } else {
       throw new PHPHARchive_InvalidSchemaException("'headersSize' is mandatory in a 'response' object");
     }
 
     // bodySize; mandatory
     if (array_key_exists("bodySize", $response)) {
-      $this->body_size = $response["bodySize"]
+      $this->body_size = $response["bodySize"];
     } else {
       throw new PHPHARchive_InvalidSchemaException("'bodySize' is mandatory in a 'response' object");
     }
