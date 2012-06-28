@@ -16,7 +16,7 @@
         <email>adam@element34.ca</email>
         <active>yes</active>
     </lead>
-    <date>2012-06-26</date>
+    <date>2012-06-28</date>
     <version>
         <release>1.0.0</release>
         <api>1.0.0</api>
@@ -30,7 +30,40 @@
     <contents>
         <dir name="/">
             <dir name="PHPHARchive">
+                <file baseinstalldir="/" name="Cache.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Content.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Cookie.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Entry.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="EntryTimings.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Exceptions.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
                 <file baseinstalldir="/" name="HAR.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Header.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Page.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="QueryString.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Request.php" role="php">
+                    <tasks:replace from="@package_version@" to="version" type="package-info" />
+                </file>
+                <file baseinstalldir="/" name="Response.php" role="php">
                     <tasks:replace from="@package_version@" to="version" type="package-info" />
                 </file>
             </dir>
