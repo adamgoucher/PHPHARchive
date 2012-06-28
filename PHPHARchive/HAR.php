@@ -97,13 +97,13 @@ class PHPHARchive_HAR {
       }
     }
 
-    // creator; mandatory
+    // entries; mandatory
     if (array_key_exists("entries", $this->raw["log"])) {
       foreach($this->raw["log"]["entries"] as $entry) {
         array_push($this->entries, new PHPHARchive_Entry($entry, $this->version));
       }
     } else {
-      throw new PHPHARchive_InvalidSchemaException("'creator' is mandatory in the 'log' object");
+      throw new PHPHARchive_InvalidSchemaException("'entries' is mandatory in the 'log' object");
     }
       
     // comment; optional, introduced in 1.2
