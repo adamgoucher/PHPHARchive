@@ -64,7 +64,7 @@ class PHPHARchive_EntryTimings {
       if ($version == "1.1") {
         throw new PHPHARchive_InvalidSchemaException("'ssl' is not valid in a 1.1 schema");
       }
-      $this->ssl = $entry["ssl"];
+      $this->ssl = $timings["ssl"];
     } else {
       $this->ssl = Null;
     }
