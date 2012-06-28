@@ -19,7 +19,7 @@ class PHPHARchive_Request {
       if (strlen($request["method"]) == 0) {
         throw new PHPHARchive_InvalidSchemaException("'method' must contain 'Request method (GET, POST, ...)'");
       }
-      $this->method = $request["startedDateTime"];            
+      $this->method = $request["method"];            
     } else {
       throw new PHPHARchive_InvalidSchemaException("'method' is mandatory in a 'request' object");
     }
