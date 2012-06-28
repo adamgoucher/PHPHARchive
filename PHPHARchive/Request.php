@@ -72,8 +72,8 @@ class PHPHARchive_Request {
     }
     
     // postData; optional
-    if (array_key_exists("postData", $entry)) {
-      $this->post_data = $entry["postData"];
+    if (array_key_exists("postData", $request)) {
+      $this->post_data = $request["postData"];
     } else {
       $this->post_data = Null;
     }
