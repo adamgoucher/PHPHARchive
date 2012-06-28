@@ -50,7 +50,7 @@ class PHPHARchive_Response {
     // headers; mandatory
     if (array_key_exists("headers", $response)) {
       foreach($response["headers"] as $header) {
-        array_push($this->headers, new PHPHARchive_Cookie($header, $version));
+        array_push($this->headers, new PHPHARchive_Header($header, $version));
       }
     } else {
       throw new PHPHARchive_InvalidSchemaException("'headers' is mandatory in a 'response' object");
