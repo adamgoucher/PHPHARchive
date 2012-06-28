@@ -32,16 +32,16 @@ distribution via PEAR.
 
 * Getting all Entries for a particular page
 
-    $h = new PHPHARchive_HAR('your.har');
-    $entries = $h->get_entries_by_page_ref("page_1_0");
+        $h = new PHPHARchive_HAR('your.har');
+        $entries = $h->get_entries_by_page_ref("page_1_0");
 
 * Looking for a particular status
 
-    $h = new PHPHARchive_HAR('your.har');
-    $entries = $h->get_entries_by_page_ref("page_1_0");
-    $four_oh_fours = array();
-    foreach ($entries as $entry) {
-      if ($entry->response->status == 404) {
-        array_push($four_oh_fours, $entry);
-      }
-    }
+        $h = new PHPHARchive_HAR('your.har');
+        $entries = $h->get_entries_by_page_ref("page_1_0");
+        $four_oh_fours = array();
+        foreach ($entries as $entry) {
+          if ($entry->response->status == 404) {
+            array_push($four_oh_fours, $entry);
+          }
+        }
