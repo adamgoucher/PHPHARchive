@@ -11,15 +11,27 @@ class PHPHARchive_HAR {
   public $pages = array();
   public $entries = array();
 
-  function __construct($h) {
-    if (is_file($h)) {
-      $this->raw = json_decode(file_get_contents($h), True);
-    } elseif (substr($h, 0, 1) == "{") {
-      $this->raw = json_decode($h, True);
-    } else {
-      throw new PHPHARchive_MissingHARException($h . " does not exist on disk or is not valid JSON");
-    }
+  // http://ca2.php.net/manual/en/function.get-object-vars.php#93416
+  private function toArray($data) {
+      if (is_object($data)) $data = get_object_vars($data);
+      return is_array($data) ? array_map(__METHOD__, $data) : $data;
+  }
 
+  function __construct($h) {
+    if (is_string($h)) {
+      if (is_file($h)) {
+        $this->raw = json_decode(file_get_contents($h), True);
+      } elseif (substr($h, 0, 1) == "{") {
+        $this->raw = json_decode($h, True);
+      } else {
+        throw new PHPHARchive_MissingHARException($h . " does not exist on disk or is not valid JSON");
+      }
+    } elseif(is_object($h)) {
+      $this->raw = $this->toArray($h);
+    } elseif(is_array($h)) {
+      $this->raw = $h;
+    }
+    
     // version; mandatory, but can be empty
     if (array_key_exists("version", $this->raw["log"])) {
       if (strlen($this->raw["log"]["version"]) != 0) {

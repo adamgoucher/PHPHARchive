@@ -4,6 +4,7 @@ require_once(dirname(__FILE__) . '/../PHPHarchive/HAR.php');
 class HarTest extends PHPUnit_Framework_TestCase {
   /**
   * @group har
+  * @group file
   * @expectedException PHPHARchive_MissingHARException
   * @expectedExceptionMessage foo.har does not exist on disk or is not valid JSON
   */  
@@ -18,6 +19,15 @@ class HarTest extends PHPUnit_Framework_TestCase {
   */  
   public function test_parsing_of_a_string() {
     $h = new PHPHARchive_HAR('{"log": {"version": "1.2"}}');
+  }
+
+  /**
+  * @group har
+  * @group array
+  */  
+  public function test_parsing_of_an_array() {
+    $a = json_decode('{"log": {"version": "1.2"}}');
+    $h = new PHPHARchive_HAR($a);
   }
 
   /**
