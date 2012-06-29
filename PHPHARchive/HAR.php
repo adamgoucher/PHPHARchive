@@ -14,10 +14,12 @@ class PHPHARchive_HAR {
   function __construct($h) {
     if (is_file($h)) {
       $this->raw = json_decode(file_get_contents($h), True);
+    } elseif (substr($h, 0, 1) == "{") {
+      $this->raw = json_decode($h, True);
     } else {
-      throw new PHPHARchive_MissingHARException($h . " does not exist");
+      throw new PHPHARchive_MissingHARException($h . " does not exist on disk or is not valid JSON");
     }
-    
+
     // version; mandatory, but can be empty
     if (array_key_exists("version", $this->raw["log"])) {
       if (strlen($this->raw["log"]["version"]) != 0) {

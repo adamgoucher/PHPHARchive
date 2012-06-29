@@ -5,10 +5,19 @@ class HarTest extends PHPUnit_Framework_TestCase {
   /**
   * @group har
   * @expectedException PHPHARchive_MissingHARException
-  * @expectedExceptionMessage foo.har does not exist
+  * @expectedExceptionMessage foo.har does not exist on disk or is not valid JSON
   */  
   public function test_no_such_file() {
     $h = new PHPHARchive_HAR("foo.har");
+  }
+
+  /**
+  * @group har
+  * @group string
+  * @expectedException PHPHARchive_InvalidSchemaException
+  */  
+  public function test_parsing_of_a_string() {
+    $h = new PHPHARchive_HAR('{"log": {"version": "1.2"}}');
   }
 
   /**
